@@ -10,12 +10,21 @@
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
+    ./gaming
     inputs.home-manager.nixosModules.default
   ];
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
+  boot.binfmt.registrations.appimage = {
+    wrapInterpreterInShell = false;
+    interpreter = "${pkgs.appimage-run}/bin/appimage-run";
+    recognitionType = "magic";
+    offset = 0;
+    mask = ''\xff\xff\xff\xff\x00\x00\x00\x00\xff\xff\xff'';
+    magicOrExtension = ''\x7fELF....AI\x02'';
+  };
 
   networking.hostName = "nixos"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
@@ -121,6 +130,7 @@
     pkgs.google-chrome
     pkgs.vscode
     pkgs._1password-gui
+    pkgs.appimage-run
   ];
 
   system.stateVersion = "23.11"; # Did you read the comment?
@@ -132,6 +142,8 @@
   };
 
   virtualisation.docker.enable = true;
+
+  programs.steam.enable = true;
 
   home-manager = {
     extraSpecialArgs = {inherit inputs;};
