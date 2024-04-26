@@ -7,7 +7,6 @@ pushd ~/.dotfiles/nixos/
 alejandra . >/dev/null
 
 git add .
-git diff -U0
 
 read -p "Press enter to continue"
 
@@ -17,7 +16,7 @@ sudo nixos-rebuild switch --flake .#default
 
 current=$(nixos-rebuild list-generations --flake .#default --json | jq '.[0].generation')
 
-git commit -a
+git commit -a -m "gen: $current"
 
 popd
 

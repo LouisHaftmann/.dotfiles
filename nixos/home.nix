@@ -36,14 +36,19 @@ in {
   programs.zsh = {
     enable = true;
     enableCompletion = true;
-    enableAutosuggestions = true;
+    autosuggestion.enable = true;
     syntaxHighlighting.enable = true;
 
     shellAliases = {
       c = "code ~/.dotfiles";
+      r = "bash ~/.dotfiles/rebuild.sh";
+      u = "bash ~/.dotfiles/upgrade.sh";
     };
     oh-my-zsh = {
       enable = true;
+      plugins = [
+        "git"
+      ];
     };
     sessionVariables = {
       PNPM_HOME = pnpmHome;
@@ -74,7 +79,6 @@ in {
     enable = true;
     extraConfig = ''
       Host *
-          IdentitiesOnly=yes
           IdentityAgent ~/.1password/agent.sock
     '';
   };

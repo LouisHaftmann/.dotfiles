@@ -92,7 +92,12 @@
     description = "Louis Haftmann";
     extraGroups = ["networkmanager" "wheel" "docker"];
     packages = with pkgs; [];
+    shell = pkgs.zsh;
   };
+
+  users.defaultUserShell = pkgs.zsh;
+
+  programs.zsh.enable = true;
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
