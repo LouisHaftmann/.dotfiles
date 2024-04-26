@@ -8,4 +8,10 @@ sudo nix flake update
 
 popd
 
+
+pushd ~/.dotfiles
+
 ./rebuild.sh
+
+popd
+
