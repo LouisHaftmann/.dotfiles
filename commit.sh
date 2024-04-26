@@ -7,6 +7,7 @@ pushd ~/.dotfiles/nixos/
 alejandra . >/dev/null
 
 git add .
+git --no-pager diff -U0
 
 read -p "Press enter to continue"
 
